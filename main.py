@@ -21,7 +21,7 @@ def count_clicks(token, link):
 
 def main():
     load_dotenv()
-    BITLY_TOKEN = os.getenv("BITLY_TOKEN")
+    bitly_token = os.getenv("BITLY_TOKEN")
     parser = argparse.ArgumentParser(description='Программа сокращает ссылки '
                                                  'и выдает статистику '
                                                  'переходов по ним')
@@ -32,12 +32,12 @@ def main():
     if url.startswith(("https://bit.ly", "bit.ly")):
         try:
             print('Количество переходов по ссылке:',
-                  count_clicks(BITLY_TOKEN, url.replace("https://", "")))
+                  count_clicks(bitly_token, url.replace("https://", "")))
         except requests.exceptions.HTTPError:
             print("Ошибка")
     else:
         try:
-            print('Битлинк', shorten_link(BITLY_TOKEN, url))
+            print('Битлинк', shorten_link(bitly_token, url))
         except requests.exceptions.HTTPError:
             print("Ошибка")
 
